@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="block2 row">
+        <h2 class="col-sm-12">Qualification</h2>
+        {% for item in qual_pack %}
+        <div class="col-sm-4">
+            <h3>{{ item.name }}</h3>
+            <p>Цена: {{ item.price }} $</p>
+            <p>id: {{ item.id }}</p>
+            <a href="{{ item.get_absolute_url }}" class="btn">Buy</a>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="block3 row">
+         <h2 class="col-sm-12">Boost</h2>
+        {% for item in boost_pack %}
+        <div class="col-sm-4">
+            <h3>{{ item.name }}</h3>
+            <p>Цена: {{ item.price }} $</p>
+            <p>id: {{ item.id }}</p>
+            <a href="{{ item.get_absolute_url }}" class="btn">Buy</a>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
