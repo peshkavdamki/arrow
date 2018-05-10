@@ -7,7 +7,8 @@ from .calculatePrice import calculate_price
 # Create your models here.
 TYPE = (
     ('B','boost'),
-    ('Q','qualification')
+    ('Q','qualification'),
+    ('C', 'custom')
 )
 
 

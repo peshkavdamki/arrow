@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <div class="block2 row">
+    <div class="qualification row">
         <h2 class="col-sm-12">Qualification</h2>
         {% for item in qual_pack %}
         <div class="col-sm-4">
@@ -14,7 +14,7 @@
         {% endfor %}
 
     </div>
-    <div class="block3 row">
+    <div class="boost row">
          <h2 class="col-sm-12">Boost</h2>
         {% for item in boost_pack %}
         <div class="col-sm-4">
@@ -24,7 +24,23 @@
             <a href="{{ item.get_absolute_url }}" class="btn">Buy</a>
         </div>
         {% endfor %}
-
+    </div>
+    <div class="custom row">
+        <h2>Custom</h2>
+        <div class="col-sm-5">
+            <a href="{{ custom.get_absolute_url }}"> Заказать кастом </a>
+        </div>
+        <div class="col-sm-7">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fringilla sodales convallis.
+                Sed quis aliquam odio. Donec ultrices lobortis risus in aliquet.
+                Pellentesque in accumsan est. Curabitur semper tortor vitae nisi sodales luctus.
+                Nunc sit amet venenatis turpis, facilisis mollis felis. Donec lobortis quam porttitor quam vehicula pulvinar.
+                Curabitur augue neque, mollis non iaculis sit amet, tincidunt convallis nibh.
+                Donec vulputate eros lacus, ac imperdiet lorem finibus quis. Curabitur ultricies nec ipsum in efficitur.
+                Pellentesque ut rhoncus tortor.
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}

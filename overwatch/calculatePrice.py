@@ -1,3 +1,5 @@
+import math
+
 def calculate_price(old_score, new_score):
     price = 0
     point = [0, 1500, 2000, 2500, 3000, 3500, 3800, 4000, 4100, 4200, 4300, 4400]
@@ -16,4 +18,6 @@ def calculate_price(old_score, new_score):
                 price += diff*coef[i]
                 print(price)
                 score = point[i] if point[i] < new_score else new_score
-    return round(price, 1)
+
+    price = math.ceil(price*10)/10
+    return price

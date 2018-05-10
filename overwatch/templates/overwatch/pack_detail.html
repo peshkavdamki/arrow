@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     {{ product.name }}
     {{ product.id }}
@@ -14,8 +15,6 @@
         <div>
             <h1>Цена: <span id="prod_price">{{ product.price }}</span></h1>
         </div>
-
-        <button type="submit">Buy</button>
         <div id="paypal-button-container"></div>
     </form>
 

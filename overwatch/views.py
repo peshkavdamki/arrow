@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core import serializers
 
 from .models import *
-from .forms import PackForm
+from .forms import PackForm, CustomForm
 
 # Create your views here.
 
@@ -10,6 +11,7 @@ from .forms import PackForm
 def landing(request):
     boost_pack = Pack.objects.filter(type='B')
     qual_pack = Pack.objects.filter(type='Q')
+    custom = Pack.objects.get(type='C')
     return render(request, 'overwatch/landing.html', locals())
 
 
@@ -17,12 +19,20 @@ def product_detail(request, id):
     print(request)
     product = get_object_or_404(Pack, id=id, is_active=True)
 
-    if request.method != 'POST':
-        form = PackForm()
+    if product.type == 'C':
+        if request.method != 'POST':
+            form = CustomForm()
+        else:
+            form = CustomForm(request.POST)
+            if form.is_valid():
+                return HttpResponseRedirect('thanks')
     else:
-        form = PackForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('thanks')
+        if request.method != 'POST':
+            form = PackForm()
+        else:
+            form = PackForm(request.POST)
+            if form.is_valid():
+                return HttpResponseRedirect('thanks')
 
     context = {
         'product': product,
@@ -36,7 +46,7 @@ def thanks(request, id):
     if request.method == 'POST':
         print(product)
         print(id)
-        form = PackForm(request.POST)
+        form = CustomForm(request.POST)
 
         if form.is_valid():
             new_order = form.save(commit=False)
@@ -47,4 +57,9 @@ def thanks(request, id):
             new_order.save()
 
 
-    return render(request, 'overwatch/landing.html', locals())
+    return render(request, 'overwatch/thanks.html', locals())
+
+
+def packets(request):
+    data = serializers.serialize('json', Pack.objects.filter(is_active=True))
+    return HttpResponse(data)
